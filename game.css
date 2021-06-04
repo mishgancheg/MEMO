@@ -120,28 +120,13 @@ html{
     transition-property: background-color;
 }
 
-.hidden-objects {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    user-select: none;
-    width: 150px;
-    height: 150px;
-    margin: 1px;
-    opacity: 0.0;
-    font-size: 30px;
-    font-weight: 700;
-    flex: 0 0 150px;
-}
-
-
 #table1 {
     user-select: none;
     height: min-content;
 }
 
 
-td {
+.dropzone {
     width: 150px;
     height: 150px;
     text-align: center;

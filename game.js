@@ -1,19 +1,20 @@
 let tableNumbers = [];
-const edgeLen = 2;
+const EDGE_LEN = 2;
+const BLOCK_SIZE = 150;
 
 function drawTable () {
     const el = document.getElementById('desk-table-container');
 
     let tableHTML = '<table id="table1">';
     let index = 1;
-    for (let i = 0; i < edgeLen ** 2; i++) {
+    for (let i = 0; i < EDGE_LEN ** 2; i++) {
         tableNumbers.push(i + 1);
     }
     tableNumbers = shuffle(tableNumbers);
-    for (let i = 0; i < edgeLen; i++) {
+    for (let i = 0; i < EDGE_LEN; i++) {
         tableHTML += '<tr>';
-        for (let j = 0; j < edgeLen; j++) {
-            tableHTML += `<td id="i${tableNumbers[index - 1]}" class="dropzone"">${tableNumbers[index - 1]}</td>`;
+        for (let j = 0; j < EDGE_LEN; j++) {
+            tableHTML += `<td id="i${tableNumbers[index - 1]}" class="dropzone">${tableNumbers[index - 1]}</td>`;
             index++;
         }
         tableHTML += '</tr>';
@@ -26,7 +27,7 @@ function drawDraggables () {
     const el = ge('choose-box');
 
     let tableHTML = '';
-    for (let j = 1; j < edgeLen ** 2 + 1; j++) {
+    for (let j = 1; j < EDGE_LEN ** 2 + 1; j++) {
         tableHTML += `<div id="d${j}" class="draggable-object" draggable="false">${j}</div>`;
     }
     el.innerHTML = tableHTML;
@@ -102,19 +103,29 @@ function onDrop (event) {
     } else {
         blink(dropzone, '#ff4444');
     }
-    if (quantityOfCorrectHits === edgeLen ** 2) {
+    if (quantityOfCorrectHits === EDGE_LEN ** 2) {
         ge('menu').style.backgroundColor = '#39ac7a'
     }
 }
 
 function init () {
     drawTable();
+    ge('choose-box').style.width = `${BLOCK_SIZE * EDGE_LEN + 10}px`
+
     drawDraggables();
     setHardness();
+
+    const blockSize = `${BLOCK_SIZE}px`;
+
     document.querySelectorAll('.draggable-object').forEach((el) => {
+        el.style.width = blockSize;
+        el.style.height = blockSize;
+        el.style.flexBasis = blockSize;
         el.addEventListener('dragstart', onDragStart);
     });
     document.querySelectorAll('.dropzone').forEach((el) => {
+        el.style.width = blockSize;
+        el.style.height = blockSize;
         el.addEventListener('dragover', onDragOver);
         el.addEventListener('drop', onDrop);
     });
