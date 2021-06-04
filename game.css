@@ -61,14 +61,14 @@ body {
 #desk-table-container {
     display: flex;
     justify-content: center;
-    flex: 7 7 100px;
+    flex: 1 1 100px;
     height: 100%;
     background-color: #ddfff6;
     transition-property: background-color;
 }
 
 #choose-paddings {
-    flex: 3 3 100px;
+    flex: 1 1 100px;
     height: 100%;
     background-color: #ddfff6;
     box-sizing: border-box;
@@ -80,7 +80,7 @@ body {
     display: flex;
     justify-content: center;
     overflow: hidden;
-    height: calc(100% - 60px);
+    height: 100%;
     position: absolute;
     margin: 1px;
     left: 0;
@@ -92,7 +92,7 @@ body {
 #choose-box {
     display: flex;
     flex-wrap: wrap;
-    width: 330px;
+    width: 630px;
     margin-top: 3px;
 }
 
@@ -132,6 +132,7 @@ body {
 
 #table1 {
     user-select: none;
+    height: min-content;
 }
 
 
