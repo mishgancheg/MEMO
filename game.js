@@ -1,11 +1,11 @@
 let tableNumbers = [];
+const edgeLen = 2;
 
 function drawTable () {
     const el = document.getElementById('desk-table-container');
 
     let tableHTML = '<table id="table1">';
     let index = 1;
-    const edgeLen = 4;
     for (let i = 0; i < edgeLen ** 2; i++) {
         tableNumbers.push(i + 1);
     }
@@ -26,12 +26,8 @@ function drawDraggables () {
     const el = ge('choose-box');
 
     let tableHTML = '';
-    const edgeLen = 4;
     for (let j = 1; j < edgeLen ** 2 + 1; j++) {
         tableHTML += `<div id="d${j}" class="draggable-object" draggable="false">${j}</div>`;
-    }
-    for (let j = 0; j < 8; j++) {
-        tableHTML += `<div class="hidden-objects"></div>`;
     }
     el.innerHTML = tableHTML;
 }
