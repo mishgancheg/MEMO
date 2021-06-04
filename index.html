@@ -5,6 +5,7 @@
     <title>Memory game</title>
     <link rel="stylesheet" href="game.css" type="text/css">
     <script src="game.js"></script>
+    <script src="control.js"></script>
 </head>
 <body onload="init()">
 <div id="main-wrapper">
@@ -12,7 +13,7 @@
         <div id="main-header"><h1>MEMO</h1></div>
         <div id="main-body">
             <div id="menu">
-                <button onclick="chooseMode()" id="modeButton">EASY</button>
+                <button onclick="rotateHardness()" id="hardnessButton"></button>
                 <button onclick="startButton()" id="start">start</button>
                 <div id="timer">Время запоминания: 30 сек</div>
                 <div id="time"></div>

@@ -45,6 +45,7 @@ function drawDraggables () {
     }
     el.innerHTML = tableHTML;
 }
+
 function blinkDigits (el, color, durationMs) {
     const initialColor = el.style.color;
     const lightOnDuration = 1;
@@ -61,19 +62,19 @@ function blinkDigits (el, color, durationMs) {
     }, lightOnDuration);
 }
 
-let mode = 0;
+
 function startButton () {
     const arrOfDropzone = document.getElementsByClassName('dropzone');
     const arrOfDraggable = document.getElementsByClassName('draggable-object');
     [...arrOfDropzone].forEach((el) => {
-        if(mode === 0){
+        if (mode === 0) {
             blinkDigits(el, 'black', 30000);
             countdown('time', 30);
-        } else if(mode === 1){
+        } else if (mode === 1) {
             blinkDigits(el, 'black', 20000);
             countdown('time', 20);
 
-        } else if(mode === 2){
+        } else if (mode === 2) {
             blinkDigits(el, 'black', 10000);
             countdown('time', 10);
         }
@@ -83,47 +84,17 @@ function startButton () {
     });
 
 }
+
 let timer; // пока пустая переменная
-function countdown(el, sec){  // функция обратного отсчета
-    ge(el).innerHTML = `${sec}`;
+function countdown (eiId, sec) {  // функция обратного отсчета
+    ge(eiId).innerHTML = `${sec}`;
     sec--;
-    if (sec<0){
+    if (sec < 0) {
         clearTimeout(timer); // таймер остановится на нуле
-    }
-    else {
-        timer = setTimeout(countdown, 1000);
-    }
-}
-function chooseMode () {
-    const el = ge('modeButton');
-    const el2 = ge('timer');
-    if(mode === 0){
-        el.innerHTML = 'EASY';
-        changeBgColor(ge('main-header'), '#ddfff6');
-        changeBgColor(ge('menu'), '#ddfff6');
-        changeBgColor(ge('desk-table-container'), '#ddfff6');
-        changeBgColor(ge('choose-overflow'), '#ddfff6');
-        changeBgColor(ge('choose-paddings'), '#ddfff6');
-        el2.innerHTML = 'Время запоминания: 30 сек'+ mode;
-        mode++;
-    }else if(mode === 1){
-        el.innerHTML = 'NORMAL';
-        changeBgColor(ge('main-header'), '#fffadd');
-        changeBgColor(ge('menu'), '#fffadd');
-        changeBgColor(ge('desk-table-container'), '#fffadd');
-        changeBgColor(ge('choose-overflow'), '#fffadd');
-        changeBgColor(ge('choose-paddings'), '#fffadd');
-        el2.innerHTML = 'Время запоминания: 20 сек'+ mode;
-        mode++;
-    }else if(mode === 2){
-        el.innerHTML = 'HARD';
-        changeBgColor(ge('main-header'), '#ffe4dd');
-        changeBgColor(ge('menu'), '#ffe4dd');
-        changeBgColor(ge('desk-table-container'), '#ffe4dd');
-        changeBgColor(ge('choose-overflow'), '#ffe4dd');
-        changeBgColor(ge('choose-paddings'), '#ffe4dd');
-        el2.innerHTML = 'Время запоминания: 10 сек'+ mode;
-        mode = 0;
+    } else {
+        timer = setTimeout(() => {
+            countdown(eiId, sec);
+        }, 1000);
     }
 }
 
@@ -163,8 +134,6 @@ function blink (el, color) {
 }
 
 
-
-
 function onDrop (event) {
     const id = event.dataTransfer.getData('text');
     event.dataTransfer.clearData();
@@ -189,6 +158,7 @@ function onDrop (event) {
 function init () {
     drawTable();
     drawDraggables();
+    setHardness();
     document.querySelectorAll('.draggable-object').forEach((el) => {
         el.addEventListener('dragstart', onDragStart);
     });
