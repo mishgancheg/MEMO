@@ -48,15 +48,11 @@ function blinkDigits (el, color, durationMs) {
     }, lightOnDuration);
 }
 
-
-
-
 function dragAbility (isDraggable) {
     [...document.getElementsByClassName('draggable-object')].forEach((el) => {
         el.draggable = isDraggable;
     });
 }
-
 
 function onDragStart (event) {
     event.dataTransfer.setData('text/plain', event.target.id);
@@ -95,9 +91,6 @@ function onDrop (event) {
     const dropzone = event.target;
     const draggableIndex = Number(id.substr(1));
     const index = Number(dropzone.id.substr(1)) - 1;
-    if (quantityOfCorrectHits === 16) {
-        ge('menu').style.backgroundColor = '#39ac7a'
-    }
     if (draggableIndex - 1 === index) {
         dropzone.innerHTML = `${index + 1}`;
         dropzone.style.color = '#ffffff';
@@ -108,6 +101,9 @@ function onDrop (event) {
         quantityOfCorrectHits++;
     } else {
         blink(dropzone, '#ff4444');
+    }
+    if (quantityOfCorrectHits === edgeLen ** 2) {
+        ge('menu').style.backgroundColor = '#39ac7a'
     }
 }
 
