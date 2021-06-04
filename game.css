@@ -2,6 +2,10 @@ body {
     padding: 0;
     margin: 0;
 }
+html{
+    background-color: #ddfff6;
+    transition-property: background-color;
+}
 
 #main-wrapper {
     display: flex;

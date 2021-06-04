@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <title>Memory game</title>
     <link rel="stylesheet" href="game.css" type="text/css">
-    <script src="game.js"></script>
+    <script src="lib.js"></script>
     <script src="control.js"></script>
+    <script src="game.js"></script>
 </head>
 <body onload="init()">
 <div id="main-wrapper">
@@ -14,7 +15,7 @@
         <div id="main-body">
             <div id="menu">
                 <button onclick="rotateHardness()" id="hardnessButton"></button>
-                <button onclick="startButton()" id="start">start</button>
+                <button onclick="startButtonClick()" id="start">start</button>
                 <div id="timer">Время запоминания: 30 сек</div>
                 <div id="time"></div>
             </div>

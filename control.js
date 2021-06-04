@@ -30,5 +30,31 @@ function setHardness () {
 
 function rotateHardness () {
     gameHardness = ++gameHardness % 3;
-    setHardness ()
+    setHardness();
 }
+
+
+let timer; // пока пустая переменная
+function countdown (eiId, sec) {  // функция обратного отсчета
+    ge(eiId).innerHTML = `${sec}`;
+    sec--;
+    if (sec < 0) {
+        clearTimeout(timer); // таймер остановится на нуле
+    } else {
+        timer = setTimeout(() => {
+            countdown(eiId, sec);
+        }, 1000);
+    }
+}
+
+function startButtonClick () {
+    const arrOfDropzone = document.getElementsByClassName('dropzone');
+    const arrOfDraggable = document.getElementsByClassName('draggable-object');
+    [...arrOfDropzone].forEach((el) => {
+        blinkDigits(el, 'black', 30000);
+    });
+    [...arrOfDraggable].forEach((el) => {
+        el.draggable = true;
+    });
+}
+

@@ -1,13 +1,4 @@
-function ge (id) {
-    return document.getElementById(id);
-}
-
 let tableNumbers = [];
-let dictOfObj = {};
-
-function shuffle (array) {
-    return array.sort(() => Math.random() - 0.5);
-}
 
 function drawTable () {
     const el = document.getElementById('desk-table-container');
@@ -17,7 +8,6 @@ function drawTable () {
     const edgeLen = 4;
     for (let i = 0; i < edgeLen ** 2; i++) {
         tableNumbers.push(i + 1);
-        dictOfObj[i + 1] = true;
     }
     tableNumbers = shuffle(tableNumbers);
     for (let i = 0; i < edgeLen; i++) {
@@ -63,40 +53,6 @@ function blinkDigits (el, color, durationMs) {
 }
 
 
-function startButton () {
-    const arrOfDropzone = document.getElementsByClassName('dropzone');
-    const arrOfDraggable = document.getElementsByClassName('draggable-object');
-    [...arrOfDropzone].forEach((el) => {
-        if (mode === 0) {
-            blinkDigits(el, 'black', 30000);
-            countdown('time', 30);
-        } else if (mode === 1) {
-            blinkDigits(el, 'black', 20000);
-            countdown('time', 20);
-
-        } else if (mode === 2) {
-            blinkDigits(el, 'black', 10000);
-            countdown('time', 10);
-        }
-    });
-    [...arrOfDraggable].forEach((el) => {
-        el.draggable = true;
-    });
-
-}
-
-let timer; // пока пустая переменная
-function countdown (eiId, sec) {  // функция обратного отсчета
-    ge(eiId).innerHTML = `${sec}`;
-    sec--;
-    if (sec < 0) {
-        clearTimeout(timer); // таймер остановится на нуле
-    } else {
-        timer = setTimeout(() => {
-            countdown(eiId, sec);
-        }, 1000);
-    }
-}
 
 
 function dragAbility (isDraggable) {
@@ -133,6 +89,8 @@ function blink (el, color) {
     }, lightOnDuration);
 }
 
+let quantityOfCorrectHits = 0;
+let quantityOfIncorrectHits = 0;
 
 function onDrop (event) {
     const id = event.dataTransfer.getData('text');
@@ -141,15 +99,17 @@ function onDrop (event) {
     const dropzone = event.target;
     const draggableIndex = Number(id.substr(1));
     const index = Number(dropzone.id.substr(1)) - 1;
+    if (quantityOfCorrectHits === 16) {
+        ge('menu').style.backgroundColor = '#39ac7a'
+    }
     if (draggableIndex - 1 === index) {
-        dictOfObj[index + 1] = false;
-        //Анимации
         dropzone.innerHTML = `${index + 1}`;
         dropzone.style.color = '#ffffff';
         dropzone.style.background = '#6bff56';
         dropzone.style.transitionProperty = 'background';
         dropzone.style.transitionDuration = '800ms';
         draggableElement.style.display = 'none';
+        quantityOfCorrectHits++;
     } else {
         blink(dropzone, '#ff4444');
     }
