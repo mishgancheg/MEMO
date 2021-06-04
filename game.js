@@ -45,63 +45,6 @@ function drawDraggables () {
     }
     el.innerHTML = tableHTML;
 }
-
-let isStarted = false;
-
-function startButton () {
-    if (isStarted) {
-        return false;
-    }
-    const arrOfDropzone = document.getElementsByClassName('dropzone');
-    const arrOfDraggable = document.getElementsByClassName('draggable-object');
-    [...arrOfDropzone].forEach((el) => {
-        el.innerHTML = '';
-        el.style.color = 'white';
-    });
-    [...arrOfDraggable].forEach((el) => {
-        el.draggable = true;
-    });
-    isStarted = true;
-}
-
-function dragAbility (isDraggable) {
-    [...document.getElementsByClassName('draggable-object')].forEach((el) => {
-        el.draggable = isDraggable
-    });
-}
-
-function showButton () {
-    for (let i = 1; i <= 16; i++) {
-        if (dictOfObj[i] === true) {
-            ge(`i${i}`).innerHTML = `${i}`;
-            blinkDigits(ge(`i${i}`), '#000000', 5000);
-        }
-    }
-    dragAbility(false);
-}
-
-
-function onDragStart (event) {
-    event.dataTransfer.setData('text/plain', event.target.id);
-}
-
-function onDragOver (event) {
-    event.preventDefault();
-}
-
-function blink (el, color) {
-    const { style } = el;
-    const initialColor = style.backgroundColor;
-    const lightOnDuration = 1;
-    const lightOffDuration = 1000;
-    style.transitionDuration = `${lightOnDuration}ms`;
-    style.backgroundColor = color;
-    setTimeout(() => {
-        style.transitionDuration = `${lightOffDuration}ms`;
-        style.backgroundColor = initialColor;
-    }, lightOnDuration);
-}
-
 function blinkDigits (el, color, durationMs) {
     const initialColor = el.style.color;
     const lightOnDuration = 1;
@@ -118,9 +61,109 @@ function blinkDigits (el, color, durationMs) {
     }, lightOnDuration);
 }
 
-//переменные для очков
-let score = 0;
-let factor = 1;
+let mode = 0;
+function startButton () {
+    const arrOfDropzone = document.getElementsByClassName('dropzone');
+    const arrOfDraggable = document.getElementsByClassName('draggable-object');
+    [...arrOfDropzone].forEach((el) => {
+        if(mode === 0){
+            blinkDigits(el, 'black', 30000);
+            countdown('time', 30);
+        } else if(mode === 1){
+            blinkDigits(el, 'black', 20000);
+            countdown('time', 20);
+
+        } else if(mode === 2){
+            blinkDigits(el, 'black', 10000);
+            countdown('time', 10);
+        }
+    });
+    [...arrOfDraggable].forEach((el) => {
+        el.draggable = true;
+    });
+
+}
+let timer; // пока пустая переменная
+function countdown(el, sec){  // функция обратного отсчета
+    ge(el).innerHTML = `${sec}`;
+    sec--;
+    if (sec<0){
+        clearTimeout(timer); // таймер остановится на нуле
+    }
+    else {
+        timer = setTimeout(countdown, 1000);
+    }
+}
+function chooseMode () {
+    const el = ge('modeButton');
+    const el2 = ge('timer');
+    if(mode === 0){
+        el.innerHTML = 'EASY';
+        changeBgColor(ge('main-header'), '#ddfff6');
+        changeBgColor(ge('menu'), '#ddfff6');
+        changeBgColor(ge('desk-table-container'), '#ddfff6');
+        changeBgColor(ge('choose-overflow'), '#ddfff6');
+        changeBgColor(ge('choose-paddings'), '#ddfff6');
+        el2.innerHTML = 'Время запоминания: 30 сек'+ mode;
+        mode++;
+    }else if(mode === 1){
+        el.innerHTML = 'NORMAL';
+        changeBgColor(ge('main-header'), '#fffadd');
+        changeBgColor(ge('menu'), '#fffadd');
+        changeBgColor(ge('desk-table-container'), '#fffadd');
+        changeBgColor(ge('choose-overflow'), '#fffadd');
+        changeBgColor(ge('choose-paddings'), '#fffadd');
+        el2.innerHTML = 'Время запоминания: 20 сек'+ mode;
+        mode++;
+    }else if(mode === 2){
+        el.innerHTML = 'HARD';
+        changeBgColor(ge('main-header'), '#ffe4dd');
+        changeBgColor(ge('menu'), '#ffe4dd');
+        changeBgColor(ge('desk-table-container'), '#ffe4dd');
+        changeBgColor(ge('choose-overflow'), '#ffe4dd');
+        changeBgColor(ge('choose-paddings'), '#ffe4dd');
+        el2.innerHTML = 'Время запоминания: 10 сек'+ mode;
+        mode = 0;
+    }
+}
+
+
+function dragAbility (isDraggable) {
+    [...document.getElementsByClassName('draggable-object')].forEach((el) => {
+        el.draggable = isDraggable;
+    });
+}
+
+
+function onDragStart (event) {
+    event.dataTransfer.setData('text/plain', event.target.id);
+}
+
+function onDragOver (event) {
+    event.preventDefault();
+}
+
+function changeBgColor (el, color) {
+    el.style.background = color;
+    el.style.transitionProperty = 'background';
+    el.style.transitionDuration = '800ms';
+}
+
+function blink (el, color) {
+    const { style } = el;
+    const initialColor = style.backgroundColor;
+    const lightOnDuration = 1;
+    const lightOffDuration = 1000;
+    style.transitionDuration = `${lightOnDuration}ms`;
+    style.backgroundColor = color;
+    setTimeout(() => {
+        style.transitionDuration = `${lightOffDuration}ms`;
+        style.backgroundColor = initialColor;
+    }, lightOnDuration);
+}
+
+
+
 
 function onDrop (event) {
     const id = event.dataTransfer.getData('text');
@@ -138,15 +181,8 @@ function onDrop (event) {
         dropzone.style.transitionProperty = 'background';
         dropzone.style.transitionDuration = '800ms';
         draggableElement.style.display = 'none';
-        //Очки
-        score += 100 * factor ** 2;
-        factor++;
-        ge('score').innerHTML = `Score: ${score}`;
-        ge('combo').innerHTML = `Combo: ${factor - 1}`;
     } else {
         blink(dropzone, '#ff4444');
-        factor = 1;
-        ge('combo').innerHTML = 'Combo: 0';
     }
 }
 
