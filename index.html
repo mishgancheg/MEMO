@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Memory game</title>
     <link rel="stylesheet" href="game.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
     <script src="lib.js"></script>
     <script src="control.js"></script>
     <script src="game.js"></script>
@@ -12,13 +14,21 @@
 <div id="main-wrapper">
     <div id="main-container">
         <div id="main-header"><h1>MEMO</h1></div>
+        <div id="menu">
+            <button onclick="rotateHardness()" id="hardnessButton"></button>
+            <button onclick="startButtonClick()" id="start">
+                <img src="Images/play.svg" id="playImage">
+            </button>
+            <div id="timer">Время для запоминания: 30 сек</div>
+            <div id="time"></div>
+
+        </div>
+        <div id="fallsBlock">
+            <img id="fall1" src="Images/fall.svg" >
+            <img id="fall2" src="Images/fall.svg" >
+            <img id="fall3" src="Images/fall.svg" >
+        </div>
         <div id="main-body">
-            <div id="menu">
-                <button onclick="rotateHardness()" id="hardnessButton"></button>
-                <button onclick="startButtonClick()" id="start">start</button>
-                <div id="timer">Время запоминания: 30 сек</div>
-                <div id="time"></div>
-            </div>
             <div id="game-container">
                 <div id="desk-table-container">
                 </div>

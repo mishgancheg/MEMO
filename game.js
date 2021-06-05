@@ -1,5 +1,5 @@
 let tableNumbers = [];
-const EDGE_LEN = 2;
+const EDGE_LEN = 4;
 const BLOCK_SIZE = 150;
 
 function drawTable () {
@@ -33,21 +33,7 @@ function drawDraggables () {
     el.innerHTML = tableHTML;
 }
 
-function blinkDigits (el, color, durationMs) {
-    const initialColor = el.style.color;
-    const lightOnDuration = 1;
-    const lightOffDuration = durationMs;
-    el.style.transitionDuration = `${lightOnDuration}ms`;
-    el.style.color = color;
-    setTimeout(() => {
-        el.style.transitionDuration = `${lightOffDuration}ms`;
-        el.style.color = initialColor;
-        setTimeout(() => {
-            el.innerHTML = '';
-            dragAbility(true);
-        }, lightOffDuration);
-    }, lightOnDuration);
-}
+
 
 function dragAbility (isDraggable) {
     [...document.getElementsByClassName('draggable-object')].forEach((el) => {
@@ -63,11 +49,7 @@ function onDragOver (event) {
     event.preventDefault();
 }
 
-function changeBgColor (el, color) {
-    el.style.background = color;
-    el.style.transitionProperty = 'background';
-    el.style.transitionDuration = '800ms';
-}
+
 
 function blink (el, color) {
     const { style } = el;
@@ -81,7 +63,22 @@ function blink (el, color) {
         style.backgroundColor = initialColor;
     }, lightOnDuration);
 }
+function gameLost(){
+    const arrOfDropzone = document.getElementsByClassName('dropzone');
+    const arrOfDraggable = document.getElementsByClassName('draggable-object');
+    [...arrOfDropzone].forEach((dropzone) => {
+        dropzone.style.background = '#ff7474';
+        dropzone.style.transitionProperty = 'background';
+        dropzone.style.transitionDuration = '500ms';
+        dropzone.innerHTML = `${dropzone.id}`.replace('i', '');
+    });
+    [...arrOfDraggable].forEach((el) => {
+        el.draggable = false;
+    });
+}
+function gameWon(){
 
+}
 let quantityOfCorrectHits = 0;
 let quantityOfIncorrectHits = 0;
 
@@ -101,11 +98,27 @@ function onDrop (event) {
         draggableElement.style.display = 'none';
         quantityOfCorrectHits++;
     } else {
-        blink(dropzone, '#ff4444');
+        quantityOfIncorrectHits++;
+        if(quantityOfIncorrectHits === 1){
+            ge('fall1').style.opacity = '1';
+        }
+        if(quantityOfIncorrectHits === 2){
+            ge('fall2').style.opacity = '1';
+        }
+        if(quantityOfIncorrectHits === 3){
+            ge('fall3').style.opacity = '1';
+        }
+        if(quantityOfIncorrectHits === 3) {
+            gameLost();
+        }else{
+            blink(dropzone, '#ff7474');
+        }
     }
     if (quantityOfCorrectHits === EDGE_LEN ** 2) {
-        ge('menu').style.backgroundColor = '#39ac7a'
+        gameWon();
     }
+
+
 }
 
 function init () {

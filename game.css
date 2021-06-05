@@ -2,10 +2,7 @@ body {
     padding: 0;
     margin: 0;
 }
-html{
-    background-color: #ddfff6;
-    transition-property: background-color;
-}
+
 
 #main-wrapper {
     display: flex;
@@ -20,6 +17,7 @@ html{
     height: 100%;
     flex-direction: column;
     background-color: #ffe1c9;
+
 }
 
 #main-header {
@@ -32,8 +30,12 @@ html{
 }
 
 #main-header h1 {
-    font-family: "Rockin' Record", sans-serif;
-    font-size: 80px
+    font-family: 'Comfortaa', cursive;
+    color: #6bcec2;
+    font-size: 80px;
+    text-shadow: 0 0 4px #6bcec2;
+
+
 }
 
 #main-body {
@@ -44,11 +46,10 @@ html{
 }
 
 #menu {
-    flex: 0 0 300px;
+    display: flex;
     position: relative;
     top: 0;
     left: 0;
-    height: 100%;
     background-color: #ddfff6;
     transition-property: background-color;
 }
@@ -91,6 +92,7 @@ html{
     right: 0;
     transition-property: background-color;
 
+
 }
 
 #choose-box {
@@ -111,8 +113,10 @@ html{
     margin: 1px;
     background-color: #ffffff;
     font-size: 30px;
-    font-weight: 700;
+    font-family: 'Comfortaa', cursive;
     flex: 0 0 150px;
+    text-shadow: 0 0 4px #3d6f68;
+    color: #3d6f68;
     text-align: center;
     vertical-align: center;
     border-radius: 9px;
@@ -133,9 +137,86 @@ html{
     vertical-align: center;
     border-radius: 9px;
     font-size: 30px;
-    font-weight: 700;
+    font-family: 'Comfortaa', cursive;
     background-color: #ffffff;
     box-shadow: 0 0 4px #a7a7a7;
     transition-property: background-color, color;
     color: white;
+}
+
+#hardnessButton {
+    margin-left: 20px;
+    background-color: #ddfff6;
+    border: none;
+    border-radius: 9px;
+    width: 200px;
+    height: 70px;
+    font-family: 'Comfortaa', cursive;
+    box-shadow: 0 0 4px #a7a7a7;
+    text-shadow: 0 0 4px #6bcec2;
+    transition-property: background-color;
+    transition-duration: 800ms;
+    color: #6bcec2;
+    font-size: 30px;
+    padding: 23px;
+
+}
+
+#hardnessButton:hover {
+    background-color: #d0ecc9;
+}
+
+#start{
+    margin-left: 10px;
+    background-color: #ddfff6;
+    border: none;
+    border-radius: 9px;
+    width: 200px;
+    height: 70px;
+    font-family: Arial, serif;
+    box-shadow: 0 0 4px #a7a7a7;
+    transition-property: background-color;
+    transition-duration: 800ms;
+
+}
+#start:hover {
+    background-color: #d0ecc9;
+}
+#playImage{
+    margin: -20px;
+    text-shadow: 0 0 4px #6bcec2;;
+}
+#fallsBlock{
+    display: flex;
+    justify-content: center;
+    background-color: #ddfff6;
+
+}
+#fall1{
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 500ms;
+    margin-left: 20px;
+}
+#fall2{
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 500ms;
+    margin-left: 20px;
+}
+#fall3{
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 2000ms;
+    margin-left: 20px;
+}
+#timer{
+    opacity: 1;
+    font-family: 'Comfortaa', cursive;
+    font-size: 30px;
+    text-shadow: 0 0 4px #6bcec2;
+    color: #6bcec2;
+    padding: 23px;
+    transition-property: opacity;
+    transition-duration: 2000ms;
 }
