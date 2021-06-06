@@ -4,12 +4,12 @@ const hardness = {
     0: {
         name: 'EASY',
         color: '#ddfff6',
-        timeSec: 30
+        timeSec: 40
     },
     1: {
         name: 'NORMAL',
         color: '#fffadd',
-        timeSec: 20
+        timeSec: 25
     },
     2: {
         name: 'HARD',

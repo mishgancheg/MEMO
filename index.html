@@ -13,7 +13,21 @@
 <body onload="init()">
 <div id="main-wrapper">
     <div id="main-container">
-        <div id="main-header"><h1>MEMO</h1></div>
+        <div id="main-header">
+            <div style="text-align: center;">
+                <h1>MEMO</h1>
+                <div>
+                    В этой игре вам предстоит поразмять мозги и проверить свою память.<br>
+                    Правила игры:<br>
+                    Выберите сложность. От нее зависит время, отведенное для запоминания.<br>
+                    Нажмите "Start" и запомните расположение всех цифр в правой таблице.<br>
+                    Когда цифры в правой таблице погаснут, перетаскивайте плитки с цифрами с левой стороны на соответствующие места в правой таблице.<br>
+                    Игра заканчивается, когда все плитки будут расставлены на свои места.<br>
+                    После 3-х ошибок наступает проигрыш<br>
+                    Чем меньше времени потребовалось на перетаскивание плиток, тем лучше ваша память!
+                </div>
+            </div>
+        </div>
         <div id="menu">
             <button onclick="rotateHardness()" id="hardnessButton"></button>
             <button onclick="startButtonClick()" id="start">
@@ -24,9 +38,9 @@
 
         </div>
         <div id="fallsBlock">
-            <img id="fall1" src="Images/fall.svg" >
-            <img id="fall2" src="Images/fall.svg" >
-            <img id="fall3" src="Images/fall.svg" >
+            <img id="fall1" src="Images/fall.svg">
+            <img id="fall2" src="Images/fall.svg">
+            <img id="fall3" src="Images/fall.svg">
         </div>
         <div id="main-body">
             <div id="game-container">
