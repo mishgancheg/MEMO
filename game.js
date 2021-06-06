@@ -1,6 +1,6 @@
 let tableNumbers = [];
 const EDGE_LEN = 4;
-const BLOCK_SIZE = 150;
+const BLOCK_SIZE = 130;
 
 function drawTable () {
     const el = document.getElementById('desk-table-container');

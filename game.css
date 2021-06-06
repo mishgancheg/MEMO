@@ -26,7 +26,7 @@ body {
     justify-content: center;
     background-color: #ddfff6;
     transition-property: background-color;
-
+    position: relative;
 }
 
 #main-header h1 {
@@ -34,8 +34,23 @@ body {
     color: #6bcec2;
     font-size: 80px;
     text-shadow: 0 0 4px #6bcec2;
+}
 
-
+#rules {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 30vw;
+    background-color: white;
+    margin-right: 50px;
+    margin-top: 20px;
+    padding: 15px;
+    z-index: 2;
+    border-radius: 9px;
+    box-shadow: 0 0 4px #a7a7a7;
+    font-family: 'Comfortaa', cursive;
+    font-size: 13px;
+    line-height: 1.5;
 }
 
 #main-body {
